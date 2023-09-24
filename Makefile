@@ -1,9 +1,12 @@
 
-container=COMPOSER_WP_REPO_php
-image=composer_wp_repo_php
+container=WP_COMPOSER_REPO_php
+image=wp_composer_repo_php
 
 build:
 	docker build --tag $(image) .
+
+generate:
+	docker run --rm -d -v ./:/var/www/app --name $(container) $(image) php update.php
 
 run:
 	docker run --rm -d -v ./:/var/www/app --name $(container) $(image) sleep infinity

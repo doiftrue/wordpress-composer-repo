@@ -4,6 +4,7 @@ namespace WPRepo;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
 
 class HttpClient
 {
@@ -14,6 +15,9 @@ class HttpClient
 		$this->client = new Client();
 	}
 
+	/**
+	 * @throws GuzzleException
+	 */
 	public function get(string $url): object
 	{
 		$res = $this->client->request('GET', $url);
