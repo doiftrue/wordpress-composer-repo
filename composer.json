@@ -1,0 +1,19 @@
+{
+  "name": "doiftrue/wp-core-composer-repository",
+  "description": "Repository for composer with all WP core versions.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Timur Kamaev",
+      "email": "tnkamaev@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^7"
+  },
+  "autoload": {
+    "psr-4": {
+      "WPRepo\\": "src/"
+    }
+  }
+}
