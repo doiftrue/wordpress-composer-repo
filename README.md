@@ -27,12 +27,12 @@ Warning: Do not employ `composer/installers` or designate a custom folder for th
 
 ```json
 {
-	"require": {
-		"wordpress/wordpress": "~6.3.0"
-	},
-	"scripts": {
-		"post-autoload-dump": "rsync -a --exclude 'wp-content/' ./vendor/wordpress/wordpress/* ./"
-	}
+    "require": {
+        "wordpress/wordpress": "~6.3.0"
+    },
+    "scripts": {
+        "post-autoload-dump": "rsync -a --exclude 'wp-content/' ./vendor/wordpress/wordpress/* ./"
+    }
 }
 ```
 
@@ -45,20 +45,20 @@ Here we use `-patch` suffix for defined version, this will lead to download Word
 
 ```json
 {
-	"require": {
-		"wordpress/wordpress": "~6.3.0-patch",
-		"composer/installers": "*"
-	},
-	"extra": {
-		"installer-paths": {
-			"wp/": [ "wordpress/wordpress" ]
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	}
+    "require": {
+        "wordpress/wordpress": "~6.3.0-patch",
+        "composer/installers": "*"
+    },
+    "extra": {
+        "installer-paths": {
+            "wp/": [ "wordpress/wordpress" ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }
 ```
 

@@ -13,7 +13,7 @@ try {
 	$updater = new RepoUpdater(repoDir: __DIR__, jsonData: $repo->toJson());
 	$saved = $updater->saveToFile();
 
-	if ($saved) {
+	if (!$saved) {
 		throw new \RuntimeException('ERROR: Something went wrong: the data not saved to file.');
 	}
 } catch (\Throwable $ex) {

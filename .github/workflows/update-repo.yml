@@ -1,0 +1,46 @@
+name: Update WP composer repo
+
+on:
+  workflow_dispatch:
+  # Triggers the workflow twice a day
+  schedule:
+    - cron: "0 9,21 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update_repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Install Composer Packages
+        run: composer install --no-interaction
+
+      - name: Update packages.json repo file
+        run: |
+          php update.php
+          
+          if [ $? -eq 0 ]; then
+            if git status | grep -q "nothing to commit"; then
+              echo "Nothing to commit."
+            else
+              git config user.name github-action
+              git config user.email github-action@github.com
+              git commit -am 'Automated commit: update packages.json' 
+              git push
+            fi
+          else
+            echo "ERROR: Update failed."
+            exit 1
+          fi
