@@ -1,6 +1,6 @@
 <?php
 
-namespace WPRepo;
+namespace Repo;
 
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -10,20 +10,22 @@ class ApiWorker
 
 	public const ALL_VERS_API_URL = 'http://api.wordpress.org/core/stable-check/1.0/';
 
-	private HttpClient $http;
+	public const LOWEST_VERSION = '4.1.0';
+
+	private ApiClient $api;
 
 	public function __construct()
 	{
-		$this->http = new HttpClient();
+		$this->api = new ApiClient();
 	}
 
 	/**
-	 * @return array ASC sorted WP versions.
+	 * @return string[] WP versions.
 	 * @throws GuzzleException
 	 */
-	public function getBranchLastVersions(): array
+	public function getLastVersions(): array
 	{
-		$actualVers = $this->http->get(self::LAST_VERS_API_URL)->offers;
+		$actualVers = $this->api->get(self::LAST_VERS_API_URL)->offers;
 
 		$lastBranchVers = [];
 		foreach ($actualVers as $actualVer) {
@@ -34,14 +36,15 @@ class ApiWorker
 	}
 
 	/**
-	 * @return array ASC sorted WP versions.
+	 * @return string[] WP versions.
 	 * @throws GuzzleException
+	 * @throws \JsonException
 	 */
 	public function getAllVersions(): array
 	{
-		$allVers = (array)$this->http->get(self::ALL_VERS_API_URL);
+		$allVers = (array)$this->api->get(self::ALL_VERS_API_URL);
 		$allVers = array_keys($allVers);
-		$allVers = array_filter($allVers, static fn($ver) => version_compare($ver, '4.1.0', '>='));
+		$allVers = array_filter($allVers, static fn($ver) => version_compare($ver, self::LOWEST_VERSION, '>='));
 
 		return $allVers;
 	}

@@ -1,14 +1,14 @@
 <?php
 
-namespace WPRepo;
+namespace Repo;
 
 class SourceUrl
 {
 	public const DEV_MASTER_URL = 'https://github.com/WordPress/WordPress/archive/refs/heads/master.zip';
 
-	public const DW_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}.zip';
+	public const FULL_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}.zip';
 
-	public const NO_CONTENT_DW_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}-no-content.zip';
+	public const NO_CONTENT_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}-no-content.zip';
 
 	public function __construct(public ?string $version = null)
 	{
@@ -23,12 +23,12 @@ class SourceUrl
 			return self::DEV_MASTER_URL;
 		}
 
-		return str_replace('{VERSION}', $this->version, self::DW_URL_PATT);
+		return str_replace('{VERSION}', $this->version, self::FULL_URL_PATT);
 	}
 
 	public function noContentUrl(): string
 	{
-		return str_replace('{VERSION}', $this->version, self::NO_CONTENT_DW_URL_PATT);
+		return str_replace('{VERSION}', $this->version, self::NO_CONTENT_URL_PATT);
 	}
 
 	public function archiveType(): string

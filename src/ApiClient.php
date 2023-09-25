@@ -1,12 +1,12 @@
 <?php
 
-namespace WPRepo;
+namespace Repo;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
-class HttpClient
+class ApiClient
 {
 	private ?ClientInterface $client;
 
@@ -17,16 +17,19 @@ class HttpClient
 
 	/**
 	 * @throws GuzzleException
+	 * @throws \JsonException
+	 * @throws \RuntimeException
 	 */
 	public function get(string $url): object
 	{
 		$res = $this->client->request('GET', $url);
 
 		if (200 !== $res->getStatusCode()) {
-			$msg = sprintf('Bad status code: %s.', $res->getStatusCode());
-			throw new \RuntimeException($msg);
+			throw new \RuntimeException(
+				sprintf('Bad status code: %s.', $res->getStatusCode())
+			);
 		}
 
-		return json_decode($res->getBody());
+		return json_decode($res->getBody(), false, 512, JSON_THROW_ON_ERROR);
 	}
 }

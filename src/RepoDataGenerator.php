@@ -1,6 +1,6 @@
 <?php
 
-namespace WPRepo;
+namespace Repo;
 
 class RepoDataGenerator
 {

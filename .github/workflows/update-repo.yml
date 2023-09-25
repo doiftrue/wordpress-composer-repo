@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   # Triggers the workflow twice a day
   schedule:
-    - cron: "0 9,21 * * *"
+    - cron: "48 9,21 * * *"
 
 permissions:
   contents: write
@@ -14,19 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: master
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
-
-      - name: Install Composer Packages
-        run: composer install --no-interaction
-
+          
+      - run: composer install --no-interaction --no-dev
       - name: Update packages.json repo file
         run: |
           php update.php

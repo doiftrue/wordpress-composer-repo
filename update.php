@@ -1,13 +1,13 @@
 <?php
 
-namespace WPRepo;
+namespace Repo;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 try {
 	$api = new ApiWorker();
 
-	$repo = new RepoDataGenerator($api->getBranchLastVersions());
+	$repo = new RepoDataGenerator($api->getLastVersions());
 	$repo->generate();
 
 	$updater = new RepoUpdater(repoDir: __DIR__, jsonData: $repo->toJson());
