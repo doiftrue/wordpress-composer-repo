@@ -6,15 +6,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try {
 	$api = new ApiWorker();
+	$allVersions = $api->getAllVersions();
 
-	$repo = new RepoDataGenerator($api->getLastVersions());
-	$repo->generate();
+	foreach (RepoTypes::cases() as $repoType) {
+		$repo = new RepoDataGenerator($allVersions, $repoType);
+		$repoJson = $repo->generate()->toJson();
 
-	$updater = new RepoUpdater(repoDir: __DIR__, jsonData: $repo->toJson());
-	$saved = $updater->saveToFile();
-
-	if (!$saved) {
-		throw new \RuntimeException('ERROR: Something went wrong: the data not saved to file.');
+		$updater = new RepoUpdater($repoType);
+		$updater->saveToFile($repoJson);
 	}
 } catch (\Throwable $ex) {
 	$trace = $ex->getTraceAsString();

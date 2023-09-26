@@ -2,7 +2,7 @@
 
 namespace Repo;
 
-class SourceUrl
+class RepoItemGenerator
 {
 	public const DEV_MASTER_URL = 'https://github.com/WordPress/WordPress/archive/refs/heads/master.zip';
 
@@ -10,14 +10,31 @@ class SourceUrl
 
 	public const NO_CONTENT_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}-no-content.zip';
 
-	public function __construct(public ?string $version = null)
-	{
+	public function __construct(
+		private readonly RepoTypes $repoType,
+		public ?string $version = null,
+	) {
 		if (!$this->version) {
 			$this->version = 'dev-master';
 		}
 	}
 
-	public function url(): string
+	public function generateItem(): array
+	{
+		$url = ($this->repoType === RepoTypes::noContent) ? $this->noContentUrl() : $this->url();
+
+		return [
+			'name' => RepoDataGenerator::PACKAGE_NAME,
+			'type' => RepoDataGenerator::PACKAGE_TYPE,
+			'version' => $this->version,
+			'dist' => [
+				'url' => $url,
+				'type' => $this->archiveType(),
+			]
+		];
+	}
+
+	private function url(): string
 	{
 		if ('dev-master' === $this->version) {
 			return self::DEV_MASTER_URL;
@@ -26,12 +43,16 @@ class SourceUrl
 		return str_replace('{VERSION}', $this->version, self::FULL_URL_PATT);
 	}
 
-	public function noContentUrl(): string
+	private function noContentUrl(): string
 	{
+		if ('dev-master' === $this->version) {
+			return ''; // `no-content` has no `dev-master` URL
+		}
+
 		return str_replace('{VERSION}', $this->version, self::NO_CONTENT_URL_PATT);
 	}
 
-	public function archiveType(): string
+	private function archiveType(): string
 	{
 		$url = explode('?', $this->url())[0];
 		preg_match('~\.([^.]+)$~', $url, $match);

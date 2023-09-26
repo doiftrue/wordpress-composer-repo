@@ -10,9 +10,11 @@ class ApiWorker
 
 	public const ALL_VERS_API_URL = 'http://api.wordpress.org/core/stable-check/1.0/';
 
-	public const LOWEST_VERSION = '4.1.0';
+	public const LOWEST_VERSION = '3.3.0';
 
 	private ApiClient $api;
+
+	private array $versionsData;
 
 	public function __construct()
 	{
@@ -20,19 +22,15 @@ class ApiWorker
 	}
 
 	/**
-	 * @return string[] WP versions.
-	 * @throws GuzzleException
+	 * @throws \Throwable
 	 */
-	public function getLastVersions(): array
+	public function getVersionsData(): array
 	{
-		$actualVers = $this->api->get(self::LAST_VERS_API_URL)->offers;
-
-		$lastBranchVers = [];
-		foreach ($actualVers as $actualVer) {
-			$lastBranchVers[] = $actualVer->version;
+		if (empty($this->versionsData)) {
+			$this->versionsData = $this->api->get(self::LAST_VERS_API_URL)->offers;
 		}
 
-		return $lastBranchVers;
+		return $this->versionsData;
 	}
 
 	/**

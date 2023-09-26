@@ -1,32 +1,51 @@
 Composer Repository for WordPress core instalation
 ==================================================
 
-This repository just create `packages.json` file that can be used as yet another composer repository. The repository contains urls for the WordPress core. All source URLs are the official wordpress.org urls. 
+This repository simply generates a `packages.json` file that can be utilized as another Composer repository. It includes URLs pointing to the WordPress core zip archives hosted on the official WordPress.org site.
 
-WARNING: all packages marked with `type: wordpress-dropin` (not `type: wordpress-core`) in order to have the ability to use default [composer/installers](https://github.com/composer/installers) to install the WordPress core to desired folder. 
 
 
 Usage
 -----
-Add repository to your composer.json file as follows:
+Add repository to your `composer.json` file as follows:
 
 ```json
 {
     "repositories": [
         {
             "type": "composer",
-            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/master"
+            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo"
         }
     ]
 }
 ```
 
-### Option 1: Install full WP into the root dir
-
-Warning: Do not employ `composer/installers` or designate a custom folder for the package. This is because, during a future update, it will definitively overwrite all files in your project. Instead, utilize a custom post-autoload-dump script to copy the required files to the designated directory. 
+If you need WP core files only without `wp-content` directory. Append : 
 
 ```json
 {
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/no-content"
+        }
+    ]
+}
+```
+
+
+### Option 1: Install Full WP into the root dir
+
+**WARNING:** Do not use `composer/installers` for the full WP files instalation. This is because, during a future update, composer will overwrite all files in your project. Instead, utilize a custom `post-autoload-dump` script to copy the required files to the designated directory. 
+
+```json
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo"
+        }
+    ],
     "require": {
         "wordpress/wordpress": "~6.3.0"
     },
@@ -36,17 +55,25 @@ Warning: Do not employ `composer/installers` or designate a custom folder for th
 }
 ```
 
-Note: the command under `post-autoload-dump` runs automatically after `composer install` or `composer update`. It copies the `vendor/wordpress/wordpress` files to current root directory.
+The `post-autoload-dump` command runs automatically after `composer install` or `composer update`. It copies the `vendor/wordpress/wordpress` files to current root directory.
 
 
-### Option 2: Install WP core files only (without `wp-content` directory) to `wp` dir 
+### Option 2: Install WP core files only to `wp` folder 
 
-Here we use `-patch` suffix for defined version, this will lead to download WordPress package with core files only (without wp-content directory):
+Here, we append /no-content to the repository URL. This will result in downloading WordPress core files without the wp-content folder.
+
+In this scenario, you can utilize the "composer/installers" package to place WordPress to the desired folder (is the `wp/` folder in example below).
 
 ```json
 {
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/no-content"
+        }
+    ],
     "require": {
-        "wordpress/wordpress": "~6.3.0-patch",
+        "wordpress/wordpress": "~6.3.0",
         "composer/installers": "*"
     },
     "extra": {
@@ -63,19 +90,25 @@ Here we use `-patch` suffix for defined version, this will lead to download Word
 ```
 
 
-Versioning notes
-----------------
-
-This repository contains only last versions of each WP branch (minor updates). For example, if you specified exact version like this: `"wordpress/wordpress": "6.2.1"`, when `6.2.2` will be released `6.2.2` will be downloaded, but not `6.2.1`. 
+Versioning
+----------
 
 WP Versions Schema: `6.3.1` = `MAJOR.MINOR.PATCH`.
 
 Examples:
 - `"dev-master"` - the latest development version.
-- `"~6.3.0"` - allowes update PATCH number only. Same as `"6.3.*"`.
-- `"^6.3.0"` - allowes update MINOR and PATCH. Same as `"^6"`.
+- `"~6.3.0"` - allowes update PATCHs only. Same as `"6.3.*"`.
+- `"^6.3.0"` - allowes update MINORs and PATCHs. Same as `"^6"`.
 
-Examples for `-patch` suffix (WP build without wp-content directory):
-- `"dev-master"` - there is no "no-content" build for "dev-master" version. 
-- `"~6.3.0-patch"` - allowes update PATCH number only. Same as `"6.3.*-patch"`.
-- `"^6.3.0-patch"` - allowes update MINOR and PATCH. Same as `"^6-patch"`.
+
+
+Notes
+-----
+
+- **WARNING:** The package is designated with `type: wordpress-dropin` (rather than `type: wordpress-core`) to enable the utilization of the default [composer/installers](https://github.com/composer/installers) package. This allows for the installation of the WordPress core into the desired folder.
+
+
+
+Docs
+----
+https://getcomposer.org/doc/05-repositories.md#hosting-your-own

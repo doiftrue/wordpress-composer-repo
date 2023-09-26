@@ -6,19 +6,36 @@ class RepoUpdater
 {
 	public const FILE_NAME = 'packages.json';
 
+	public readonly string $saveFilePath;
+
 	public function __construct(
-		private readonly string $repoDir,
-		private readonly string $jsonData,
+		private readonly RepoTypes $repoType,
 	) {
-		if (!is_writable($this->repoDir)) {
+		$this->saveFilePath = match ($this->repoType->name) {
+			RepoTypes::full->name =>
+				dirname(__DIR__) . '/repo/' . self::FILE_NAME,
+			RepoTypes::noContent->name =>
+				dirname(__DIR__) . '/repo/no-content/' . self::FILE_NAME,
+		};
+
+		if (!is_writable($this->saveFilePath)) {
 			throw new \RuntimeException(
-				sprintf('Repo dir is not exists or is not writeable: %s', $this->repoDir)
+				sprintf('Repo dir is not exists or is not writeable: %s', $this->saveFilePath)
 			);
 		}
 	}
 
-	public function saveToFile(): bool
+	/**
+	 * @throws \RuntimeException
+	 */
+	public function saveToFile(string $json): void
 	{
-		return (bool)file_put_contents("$this->repoDir/" . self::FILE_NAME, $this->jsonData);
+		$saved = file_put_contents($this->saveFilePath, $json);
+
+		if (!$saved) {
+			throw new \RuntimeException(
+				"ERROR: Something went wrong: the data not saved to file: $this->saveFilePath."
+			);
+		}
 	}
 }
