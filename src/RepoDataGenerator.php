@@ -21,15 +21,12 @@ class RepoDataGenerator
 
 	public function generate(): self
 	{
-		$mtime = filemtime( ( new RepoUpdater($this->repoType) )->saveFilePath );
-
 		$this->repo = [
 			'packages' => [
 				self::PACKAGE_NAME => [
 					...$this->collectItems()
 				]
 			],
-			'last-modified' => date('D, d M Y H:i:s T', $mtime ),
 		];
 
 		return $this;
@@ -52,7 +49,7 @@ class RepoDataGenerator
 	{
 		// add dev-maser version.
 		// NOTE: RepoTypes::noContent has no `dev-master` version.
-		if($this->repoType === RepoTypes::full){
+		if ($this->repoType === RepoTypes::full) {
 			$item = new RepoItemGenerator($this->repoType, version: null);
 			$items = [
 				'dev-master' => $item->generateItem()
