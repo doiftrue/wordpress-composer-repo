@@ -47,14 +47,9 @@ class RepoDataGenerator
 
 	private function collectItems(): array
 	{
-		// add dev-maser version.
-		// NOTE: RepoTypes::noContent has no `dev-master` version.
-		if ($this->repoType === RepoTypes::full) {
-			$item = new RepoItemGenerator($this->repoType, version: null);
-			$items = [
-				'dev-master' => $item->generateItem()
-			];
-		}
+		$items = [];
+
+		$this->add_dev_maser_version($items);
 
 		foreach ($this->versionsArray as $ver) {
 			$item = new RepoItemGenerator($this->repoType, $ver);
@@ -63,6 +58,19 @@ class RepoDataGenerator
 		}
 
 		return $items;
+	}
+
+	private function add_dev_maser_version(&$items): void
+	{
+		// NOTE: RepoTypes::noContent has no `dev-master` version.
+		if ($this->repoType === RepoTypes::noContent) {
+			return;
+		}
+
+		$item = new RepoItemGenerator($this->repoType, 'dev-master');
+		$items = [
+			$item->version => $item->generateItem()
+		];
 	}
 
 	private function sortVers(array $vers): array

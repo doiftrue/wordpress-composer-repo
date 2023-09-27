@@ -12,11 +12,8 @@ class RepoItemGenerator
 
 	public function __construct(
 		private readonly RepoTypes $repoType,
-		public ?string $version = null,
+		public readonly string $version = 'dev-master',
 	) {
-		if (!$this->version) {
-			$this->version = 'dev-master';
-		}
 	}
 
 	public function generateItem(): array
@@ -34,9 +31,14 @@ class RepoItemGenerator
 		];
 	}
 
+	private function isDevMasterVersion(): bool
+	{
+		return 'dev-master' === $this->version;
+	}
+
 	private function url(): string
 	{
-		if ('dev-master' === $this->version) {
+		if ($this->isDevMasterVersion()) {
 			return self::DEV_MASTER_URL;
 		}
 
@@ -45,7 +47,7 @@ class RepoItemGenerator
 
 	private function noContentUrl(): string
 	{
-		if ('dev-master' === $this->version) {
+		if ($this->isDevMasterVersion()) {
 			return ''; // `no-content` has no `dev-master` URL
 		}
 

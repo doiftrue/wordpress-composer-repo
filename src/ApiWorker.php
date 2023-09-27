@@ -12,26 +12,12 @@ class ApiWorker
 
 	public const LOWEST_VERSION = '3.3.0';
 
-	private ApiClient $api;
-
 	private array $versionsData;
 
-	public function __construct()
-	{
-		$this->api = new ApiClient();
-	}
-
-	/**
-	 * @throws \Throwable
-	 */
-	public function getVersionsData(): array
-	{
-		if (empty($this->versionsData)) {
-			$this->versionsData = $this->api->get(self::LAST_VERS_API_URL)->offers;
-		}
-
-		return $this->versionsData;
-	}
+	public function __construct(
+		private readonly ApiClient $api = new ApiClient()
+	)
+	{}
 
 	/**
 	 * @return string[] WP versions.
@@ -45,6 +31,18 @@ class ApiWorker
 		$allVers = array_filter($allVers, static fn($ver) => version_compare($ver, self::LOWEST_VERSION, '>='));
 
 		return $allVers;
+	}
+
+	/**
+	 * @throws \Throwable
+	 */
+	public function getVersionsData(): array
+	{
+		if (empty($this->versionsData)) {
+			$this->versionsData = $this->api->get(self::LAST_VERS_API_URL)->offers;
+		}
+
+		return $this->versionsData;
 	}
 
 }
