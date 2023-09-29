@@ -16,15 +16,11 @@ class RepoUpdater
 
 	public function setSaveFilePath(): void
 	{
-		// TODO extract __DIR__ out of here
-		$this->saveFilePath = match ($this->repoType->name) {
-			RepoTypes::full->name => dirname(__DIR__) . '/repo/' . self::FILE_NAME,
-			RepoTypes::noContent->name => dirname(__DIR__) . '/repo/no-content/' . self::FILE_NAME,
-		};
+		$this->saveFilePath = sprintf('%s/%s/%s', ROOT_DIR, $this->repoType->value, self::FILE_NAME);
 
 		if (!is_writable($this->saveFilePath)) {
 			throw new \RuntimeException(
-				sprintf('Repo dir is not exists or is not writeable: %s', $this->saveFilePath)
+				sprintf('Repo file is not exists or is not writeable: %s', $this->saveFilePath)
 			);
 		}
 	}

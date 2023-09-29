@@ -21,7 +21,7 @@ jobs:
       - run: composer install --no-interaction --no-dev
       - name: Update packages.json repo file
         run: |
-          php update.php
+          php run.php update
           
           if [ $? -eq 0 ]; then
             if git status | grep -q "nothing to commit"; then

@@ -18,25 +18,31 @@ class RepoItemGenerator
 
 	public function generateItem(): array
 	{
-		$url = ($this->repoType === RepoTypes::noContent) ? $this->noContentUrl() : $this->url();
-
 		return [
 			'name' => RepoDataGenerator::PACKAGE_NAME,
 			'type' => RepoDataGenerator::PACKAGE_TYPE,
 			'version' => $this->version,
 			'dist' => [
-				'url' => $url,
+				'url' => $this->url(),
 				'type' => $this->archiveType(),
 			]
 		];
 	}
 
-	private function isDevMasterVersion(): bool
+	public function url(): string
 	{
-		return 'dev-master' === $this->version;
+		return ($this->repoType === RepoTypes::noContent) ? $this->noContentUrl() : $this->fullUrl();
 	}
 
-	private function url(): string
+	public function archiveType(): string
+	{
+		$url = explode('?', $this->url())[0];
+		preg_match('~\.([^.]+)$~', $url, $match);
+
+		return $match[1] ?? 'zip';
+	}
+
+	private function fullUrl(): string
 	{
 		if ($this->isDevMasterVersion()) {
 			return self::DEV_MASTER_URL;
@@ -54,11 +60,8 @@ class RepoItemGenerator
 		return str_replace('{VERSION}', $this->version, self::NO_CONTENT_URL_PATT);
 	}
 
-	private function archiveType(): string
+	private function isDevMasterVersion(): bool
 	{
-		$url = explode('?', $this->url())[0];
-		preg_match('~\.([^.]+)$~', $url, $match);
-
-		return $match[1] ?? 'zip';
+		return 'dev-master' === $this->version;
 	}
 }
