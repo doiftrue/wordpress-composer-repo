@@ -13,13 +13,15 @@ $goodUrls = [];
 $api = new WporgApiClient();
 
 foreach ($api->getAllVersions() as $ver) {
-	$item = new RepoItemGenerator(RepoTypes::noContent, $ver);
-	$url = $item->url();
+	foreach (RepoTypes::cases() as $repoType) {
+		$package = new RepoPackage($repoType, $ver);
+		$url = $package->url();
 
-	match ($api->isUrlAvailable($url)) {
-		true => $goodUrls[] = $url,
-		false => $badUrls[] = $url,
-	};
+		match ($api->isUrlAvailable($url)) {
+			true => $goodUrls[] = $url,
+			false => $badUrls[] = $url,
+		};
+	}
 }
 
 echo "Bad Urls:\n";

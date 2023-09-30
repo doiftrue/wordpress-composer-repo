@@ -1,6 +1,6 @@
 {
   "name": "doiftrue/wp-core-composer-repository",
-  "description": "Repository for composer with all WP core versions.",
+  "description": "Repository for composer with all WP core versions. Downloads from wordpress.org.",
   "license": "MIT",
   "authors": [
     {

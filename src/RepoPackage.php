@@ -2,11 +2,13 @@
 
 namespace Repo;
 
-class RepoItemGenerator
+class RepoPackage
 {
 	public const DEV_MASTER_URL = 'https://github.com/WordPress/WordPress/archive/refs/heads/master.zip';
 
 	public const FULL_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}.zip';
+
+	public const NEW_BUNDLED_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}-new-bundled.zip';
 
 	public const NO_CONTENT_URL_PATT = 'https://downloads.wordpress.org/release/wordpress-{VERSION}-no-content.zip';
 
@@ -16,7 +18,7 @@ class RepoItemGenerator
 	) {
 	}
 
-	public function generateItem(): array
+	public function getData(): array
 	{
 		return [
 			'name' => RepoDataGenerator::PACKAGE_NAME,
@@ -31,7 +33,11 @@ class RepoItemGenerator
 
 	public function url(): string
 	{
-		return ($this->repoType === RepoTypes::noContent) ? $this->noContentUrl() : $this->fullUrl();
+		return match ($this->repoType) {
+			RepoTypes::full => $this->fullUrl(),
+			RepoTypes::noContent => $this->noContentUrl(),
+			RepoTypes::newBundled => $this->newBundledUrl(),
+		};
 	}
 
 	public function archiveType(): string
@@ -49,6 +55,15 @@ class RepoItemGenerator
 		}
 
 		return str_replace('{VERSION}', $this->version, self::FULL_URL_PATT);
+	}
+
+	private function newBundledUrl(): string
+	{
+		if ($this->isDevMasterVersion()) {
+			return ''; // `no-content` has no `dev-master` URL
+		}
+
+		return str_replace('{VERSION}', $this->version, self::NEW_BUNDLED_URL_PATT);
 	}
 
 	private function noContentUrl(): string

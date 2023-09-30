@@ -13,10 +13,10 @@ class RepoDataGenerator
 	private array $repo;
 
 	public function __construct(
-		private array $versionsArray,
+		private array $wpVersions,
 		private readonly RepoTypes $repoType,
 	) {
-		$this->versionsArray = $this->sortVers($this->versionsArray);
+		$this->wpVersions = $this->sortVers($this->wpVersions);
 	}
 
 	public function generate(): self
@@ -24,7 +24,7 @@ class RepoDataGenerator
 		$this->repo = [
 			'packages' => [
 				self::PACKAGE_NAME => [
-					...$this->collectItems()
+					...$this->collectPackages()
 				]
 			],
 		];
@@ -45,32 +45,29 @@ class RepoDataGenerator
 		return json_encode($this->repo, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 	}
 
-	private function collectItems(): array
+	private function collectPackages(): array
 	{
-		$items = [];
+		$packages = [];
 
-		$this->add_dev_maser_version($items);
+		$this->addDevMaserVersion($packages);
 
-		foreach ($this->versionsArray as $ver) {
-			$item = new RepoItemGenerator($this->repoType, $ver);
+		foreach ($this->wpVersions as $ver) {
+			$package = new RepoPackage($this->repoType, $ver);
 
-			$items[$item->version] = $item->generateItem();
+			$packages[$package->version] = $package->getData();
 		}
 
-		return $items;
+		return $packages;
 	}
 
-	private function add_dev_maser_version(&$items): void
+	private function addDevMaserVersion(&$packages): void
 	{
-		// NOTE: RepoTypes::noContent has no `dev-master` version.
-		if ($this->repoType === RepoTypes::noContent) {
-			return;
-		}
+		$package = new RepoPackage($this->repoType, 'dev-master');
 
-		$item = new RepoItemGenerator($this->repoType, 'dev-master');
-		$items = [
-			$item->version => $item->generateItem()
-		];
+		// Some packages has no `dev-master` version.
+		if ($package->url()) {
+			$packages[$package->version] = $package->getData();
+		}
 	}
 
 	private function sortVers(array $vers): array

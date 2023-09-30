@@ -1,12 +1,23 @@
 Composer Repository for WordPress core instalation
 ==================================================
 
-This repository simply generates a `packages.json` file that can be utilized as additional Composer repository. 
+This repository simply generates a `packages.json` file that can be utilized as additional Composer repository.
 
-**OFFICIAL WordPress.org files:** This composer repository contains URLs to the WordPress zip archives hosted on the WordPress.org. Examples: 
-- `https://downloads.wordpress.org/release/wordpress-6.3.1.zip`
-- `https://downloads.wordpress.org/release/wordpress-6.3.1-no-content.zip`
+There are three types of repo:
+- `full` - with akismet and hello.php plugins.
+- `new-bundled` - without akismet and hello.php plugins.
+- `no-content` - without wp-content folder.
 
+The URL of each are:
+- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo`
+- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/new-bundled`
+- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/no-content`
+
+> [!NOTE]
+> **OFFICIAL WordPress.org files:** Each repository contains URLs to the WordPress zip archives hosted on the WordPress.org. Examples:
+> - https://downloads.wordpress.org/release/wordpress-6.3.1.zip
+> - https://downloads.wordpress.org/release/wordpress-6.3.1-new-bundled.zip
+> - https://downloads.wordpress.org/release/wordpress-6.3.1-no-content.zip
 
 > [!IMPORTANT]  
 > This repository packages is designated with `type: wordpress-dropin` (rather than `type: wordpress-core`). This is non-standard way, but it allowes to use the default [composer/installers](https://github.com/composer/installers) package. This package, in turn, allows you to install WordPress core in the desired folder.
@@ -23,7 +34,7 @@ Add repository to your `composer.json` file as follows.
     "repositories": [
         {
             "type": "composer",
-            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo"
+            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/new-bundled"
         }
     ]
 }
@@ -55,7 +66,7 @@ If you need WP build without `wp-content` directory. Append `/no-content` to the
     "repositories": [
         {
             "type": "composer",
-            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo"
+            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/new-bundled"
         }
     ],
     "require": {
