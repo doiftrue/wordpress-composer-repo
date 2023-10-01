@@ -2,7 +2,7 @@
 
 namespace Repo;
 
-class RepoPackage
+class PackageVersion
 {
 	public const DEV_MASTER_URL = 'https://github.com/WordPress/WordPress/archive/refs/heads/master.zip';
 
@@ -21,8 +21,8 @@ class RepoPackage
 	public function getData(): array
 	{
 		return [
-			'name' => RepoDataGenerator::PACKAGE_NAME,
-			'type' => RepoDataGenerator::PACKAGE_TYPE,
+			'name' => RepoGenerator::PACKAGE_NAME,
+			'type' => RepoGenerator::PACKAGE_TYPE,
 			'version' => $this->version,
 			'dist' => [
 				'url' => $this->url(),

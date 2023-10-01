@@ -14,8 +14,8 @@ $api = new WporgApiClient();
 
 foreach ($api->getAllVersions() as $ver) {
 	foreach (RepoTypes::cases() as $repoType) {
-		$package = new RepoPackage($repoType, $ver);
-		$url = $package->url();
+		$packVer = new PackageVersion($repoType, $ver);
+		$url = $packVer->url();
 
 		match ($api->isUrlAvailable($url)) {
 			true => $goodUrls[] = $url,
