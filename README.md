@@ -1,17 +1,7 @@
 Composer Repository for WordPress core instalation
 ==================================================
 
-This repository simply generates a `packages.json` file that can be utilized as additional Composer repository.
-
-There are three types of repo:
-- `full` - with akismet and hello.php plugins.
-- `new-bundled` - without akismet and hello.php plugins.
-- `no-content` - without wp-content folder.
-
-The URL of each are:
-- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo`
-- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/new-bundled`
-- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/no-content`
+This repository simply generates a `packages.json` file that can be utilized as an additional Composer repository.
 
 > [!NOTE]
 > **OFFICIAL WordPress.org files:** Each repository contains URLs to the WordPress zip archives hosted on the WordPress.org. Examples:
@@ -22,39 +12,22 @@ The URL of each are:
 > [!IMPORTANT]  
 > This repository packages is designated with `type: wordpress-dropin` (rather than `type: wordpress-core`). This is non-standard way, but it allowes to use the default [composer/installers](https://github.com/composer/installers) package. This package, in turn, allows you to install WordPress core in the desired folder.
 
+There are three types of repos
+-------------------------------
+- `full` - with akismet and hello.php plugins.
+- `new-bundled` - without akismet and hello.php plugins.
+- `no-content` - without wp-content folder.
+
+The URL of each composer repository are:
+- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo`
+- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/new-bundled`
+- `https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/no-content`
+
+You should add a new composer repository to your `composer.json` file to tell the composer which URL can be used to download a specific version of WP core.
+
 
 Usage
 -----
-Add repository to your `composer.json` file as follows.
-
-#### Full WP files:
-
-```json
-{
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/new-bundled"
-        }
-    ]
-}
-```
-
-#### WP core only (without wp-content - minus ~10MB):
-
-If you need WP build without `wp-content` directory. Append `/no-content` to the base repository URL: 
-
-```json
-{
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://raw.githubusercontent.com/doiftrue/wordpress-composer-repo/main/repo/no-content"
-        }
-    ]
-}
-```
-
 
 ### Option 1: Install Full WP into the root dir
 
