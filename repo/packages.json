@@ -10,6 +10,15 @@
                     "type": "zip"
                 }
             },
+            "6.4.1": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "6.4.1",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-6.4.1.zip",
+                    "type": "zip"
+                }
+            },
             "6.4": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
