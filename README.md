@@ -29,10 +29,10 @@ You should add a new composer repository to your `composer.json` file to tell th
 Usage
 -----
 
-### Option 1: Install WP into the project Root dir
+### Option 1: Install WP into the Root dir (where other project files is)
 
 > [!WARNING]
-> Do not use `composer/installers` for the full WP files instalation. Instead, utilize a custom command for `post-autoload-dump` event to copy the required files. This is because, during a future update, composer will overwrite all files in your project.
+> Do not use `composer/installers` for this type of installation. Instead, utilize a custom command for `post-autoload-dump` event to copy the required core files. This is because, during a future update, the composer will overwrite all files in your project.
 
 ```json
 {
@@ -51,14 +51,14 @@ Usage
 }
 ```
 
-Command under `post-autoload-dump` copies the `vendor/wordpress/wordpress` files to current root directory. It requires: `linux` system with `rsync` package installed.
+Command under `post-autoload-dump` copies the `vendor/wordpress/wordpress` files to the current root directory. It requires: `linux` system with `rsync` package installed.
 
-HOTE: The `post-autoload-dump` command runs automatically after `composer install` or `composer update`.
+NOTE: The `post-autoload-dump` command runs automatically after `composer install` or `composer update`.
 
 
 #### Alternative Option 
 
-If `composer/installers` package is used, then composer will install WP-Core into `wp-content` folder and this is not what we want. To work around this issue use following `composer.json`:
+If the `composer/installers` package is used, then the composer will install WP-Core into the `wp-content` folder, which is not what we want. To work around this issue use the following `composer.json`:
 
 ```json
 {
@@ -69,7 +69,8 @@ If `composer/installers` package is used, then composer will install WP-Core int
         }
     ],
     "require": {
-        "wordpress/wordpress": "^6"
+        "wordpress/wordpress": "^6",
+         "composer/installers": "*"
     },
 	"extra": {
 		"installer-paths": {
@@ -78,6 +79,11 @@ If `composer/installers` package is used, then composer will install WP-Core int
 	},
     "scripts": {
         "post-autoload-dump": "sh ./dev/sh/composer-post-install.sh"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
     }
 }
 ```
@@ -109,15 +115,15 @@ echo '------'
 echo 'Copied'
 ```
 
-Now, after either `compose install` or `composer update` the sh script will be executed and all WP core files will be copied from the `vendor/wordpress-core` to the site `public_html` folder. 
+Now, after either `compose install` or `composer update` the `dev/sh/composer-post-install.sh` script will be executed and all WP core files will be copied from the `vendor/wordpress-core` to the site `public_html` folder (other files in this folder will not be touched). 
 NOTE: You may have another name for the `public_html` folder rename it in the code above.
 
 
-### Option 2: Install WP core files only
+### Option 2: Install WP core files only into a separate `wp` folder
 
 Here we append `/no-content` to the repository URL. This will result in downloading WordPress core files without the `wp-content` folder.
 
-In this scenario, you can utilize the [composer/installers](https://github.com/composer/installers) package to place WordPress core files to the desired folder (is the `wp/` folder in example below).
+In this scenario, you can utilize the [composer/installers](https://github.com/composer/installers) package to place WordPress core files in the desired folder (the `wp/` folder in this example).
 
 ```json
 {
