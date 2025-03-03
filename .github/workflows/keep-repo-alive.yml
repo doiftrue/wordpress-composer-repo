@@ -1,15 +1,15 @@
 name: keep-repo-alive
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 */50 * *' # every 50 days
-  workflow_dispatch:
 
 permissions:
   contents: write
   
 jobs:
-  commit:
+  add_commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

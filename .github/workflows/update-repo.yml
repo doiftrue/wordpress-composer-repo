@@ -1,10 +1,9 @@
-name: Update WP composer repo
+name: update-repo
 
 on:
   workflow_dispatch:
-  # Triggers the workflow twice a day
   schedule:
-    - cron: "48 9,21 * * *"
+    - cron: "48 9,21 * * *" # twice a day
 
 permissions:
   contents: write
@@ -12,14 +11,15 @@ permissions:
 jobs:
   update_repo:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.2
+
       - run: composer install --no-interaction --no-dev
-      - name: Update packages.json repo file
+
+      - name: ___RUN___
         run: |
           php run.php update
           
