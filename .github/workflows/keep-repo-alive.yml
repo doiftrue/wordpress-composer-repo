@@ -1,0 +1,24 @@
+name: keep-repo-alive
+
+on:
+  schedule:
+    - cron: '0 0 */50 * *' # every 50 days
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ___RUN___
+        run: |
+          git config user.name  github-action
+          git config user.email github-action@github.com
+          
+          date > keepalive.txt
+          git commit -am 'Autocommit to keep repo in active state'
+          git push
