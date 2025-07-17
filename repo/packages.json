@@ -2710,6 +2710,15 @@
                     "type": "zip"
                 }
             },
+            "4.6.30": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "4.6.30",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-4.6.30.zip",
+                    "type": "zip"
+                }
+            },
             "4.6.29": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
