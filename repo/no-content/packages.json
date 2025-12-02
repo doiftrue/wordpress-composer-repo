@@ -1,6 +1,15 @@
 {
     "packages": {
         "wordpress/wordpress": {
+            "6.9": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "6.9",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-6.9-no-content.zip",
+                    "type": "zip"
+                }
+            },
             "6.8.3": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
