@@ -370,6 +370,15 @@
                     "type": "zip"
                 }
             },
+            "6.3.8": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "6.3.8",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-6.3.8.zip",
+                    "type": "zip"
+                }
+            },
             "6.3.7": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
@@ -439,6 +448,15 @@
                 "version": "6.3",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-6.3.zip",
+                    "type": "zip"
+                }
+            },
+            "6.2.9": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "6.2.9",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-6.2.9.zip",
                     "type": "zip"
                 }
             },
@@ -520,6 +538,15 @@
                 "version": "6.2",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-6.2.zip",
+                    "type": "zip"
+                }
+            },
+            "6.1.10": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "6.1.10",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-6.1.10.zip",
                     "type": "zip"
                 }
             },
@@ -721,6 +748,15 @@
                     "type": "zip"
                 }
             },
+            "5.9.13": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.9.13",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.9.13.zip",
+                    "type": "zip"
+                }
+            },
             "5.9.12": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
@@ -838,6 +874,15 @@
                     "type": "zip"
                 }
             },
+            "5.8.13": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.8.13",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.8.13.zip",
+                    "type": "zip"
+                }
+            },
             "5.8.12": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
@@ -952,6 +997,15 @@
                 "version": "5.8",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.8.zip",
+                    "type": "zip"
+                }
+            },
+            "5.7.15": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.7.15",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.7.15.zip",
                     "type": "zip"
                 }
             },
@@ -1087,6 +1141,15 @@
                 "version": "5.7",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.7.zip",
+                    "type": "zip"
+                }
+            },
+            "5.6.17": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.6.17",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.6.17.zip",
                     "type": "zip"
                 }
             },
@@ -1240,6 +1303,15 @@
                 "version": "5.6",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.6.zip",
+                    "type": "zip"
+                }
+            },
+            "5.5.18": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.5.18",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.5.18.zip",
                     "type": "zip"
                 }
             },
@@ -1402,6 +1474,15 @@
                 "version": "5.5",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.5.zip",
+                    "type": "zip"
+                }
+            },
+            "5.4.19": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.4.19",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.4.19.zip",
                     "type": "zip"
                 }
             },
@@ -1573,6 +1654,15 @@
                 "version": "5.4",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.4.zip",
+                    "type": "zip"
+                }
+            },
+            "5.3.21": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.3.21",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.3.21.zip",
                     "type": "zip"
                 }
             },
