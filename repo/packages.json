@@ -1855,6 +1855,15 @@
                     "type": "zip"
                 }
             },
+            "5.2.24": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.2.24",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.2.24.zip",
+                    "type": "zip"
+                }
+            },
             "5.2.23": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
@@ -2071,6 +2080,15 @@
                     "type": "zip"
                 }
             },
+            "5.1.22": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.1.22",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.1.22.zip",
+                    "type": "zip"
+                }
+            },
             "5.1.21": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
@@ -2266,6 +2284,15 @@
                 "version": "5.1",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.1.zip",
+                    "type": "zip"
+                }
+            },
+            "5.0.25": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "5.0.25",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-5.0.25.zip",
                     "type": "zip"
                 }
             },
@@ -2482,6 +2509,15 @@
                 "version": "5.0",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-5.0.zip",
+                    "type": "zip"
+                }
+            },
+            "4.9.29": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "4.9.29",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-4.9.29.zip",
                     "type": "zip"
                 }
             },
@@ -2746,6 +2782,15 @@
                     "type": "zip"
                 }
             },
+            "4.8.28": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "4.8.28",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-4.8.28.zip",
+                    "type": "zip"
+                }
+            },
             "4.8.27": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
@@ -2995,6 +3040,15 @@
                 "version": "4.8",
                 "dist": {
                     "url": "https://downloads.wordpress.org/release/wordpress-4.8.zip",
+                    "type": "zip"
+                }
+            },
+            "4.7.32": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "4.7.32",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-4.7.32.zip",
                     "type": "zip"
                 }
             },
