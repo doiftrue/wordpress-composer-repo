@@ -3043,6 +3043,15 @@
                     "type": "zip"
                 }
             },
+            "4.7.33": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "4.7.33",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-4.7.33.zip",
+                    "type": "zip"
+                }
+            },
             "4.7.32": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
