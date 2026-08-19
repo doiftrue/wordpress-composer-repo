@@ -1,6 +1,15 @@
 {
     "packages": {
         "wordpress/wordpress": {
+            "7.1": {
+                "name": "wordpress/wordpress",
+                "type": "wordpress-dropin",
+                "version": "7.1",
+                "dist": {
+                    "url": "https://downloads.wordpress.org/release/wordpress-7.1-new-bundled.zip",
+                    "type": "zip"
+                }
+            },
             "7.0.4": {
                 "name": "wordpress/wordpress",
                 "type": "wordpress-dropin",
